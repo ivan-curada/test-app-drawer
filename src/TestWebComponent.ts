@@ -113,6 +113,30 @@ export class TestWebComponent extends LitElement {
       await this.requestUpdate();
       this.alignElement();
     });
+
+    
+    window.addEventListener('click', (e)=> {
+      const element = this;
+      if(e.target !== this){
+        this.show_apps = false;
+      }
+    })
+  }
+
+  onUserClick = (e: MouseEvent) => {
+    if(e.target !== this){
+      this.show_apps = false;
+    }
+  }
+
+  connectedCallback() {
+    super.connectedCallback();
+    window.addEventListener('click', this.onUserClick)
+  }
+
+  disconnectedCallback(){
+    window.removeEventListener('click', this.onUserClick);
+    super.disconnectedCallback();
   }
 
   
